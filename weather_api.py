@@ -1,5 +1,4 @@
 import requests
-from pprint import pp
 from database.db_connection import get_db_connection
 from datetime import datetime
 
@@ -16,25 +15,26 @@ def get_coordinates(city_name):
             return lat_long
 
 
-chosen_city = 'London'      # change this to see other city
-coordinates = get_coordinates(chosen_city)[0]
+# chosen_city = 'London'      # change this to see other city
 
 
-key = '3b89ec0c8c9f6607e610302a47271647'
-lat = coordinates.get('latitude')
-lon = coordinates.get('longitude')
+def get_weather(chosen_city):
+    coordinates = get_coordinates(chosen_city)[0]
+    key = '3b89ec0c8c9f6607e610302a47271647'
+    lat = coordinates.get('latitude')
+    lon = coordinates.get('longitude')
+
+    url = f'https://api.openweathermap.org/data/2.5/weather?lat={lat}&lon={lon}&appid={key}&units=metric'
+    response = requests.get(url)
+    data = response.json()
+    weather = data['weather'][0]['description']
+    temp = data['main']['temp']
+    sunset = datetime.fromtimestamp(data['sys']['sunset'])
+    sunrise = datetime.fromtimestamp(data['sys']['sunrise'])
+    # name = data['name']           # Sometimes too specific (getting districts of the city)
+
+    return f"""Current weather in {chosen_city} shows {weather}, with temp around {temp}C.
+            Sunrise: {sunrise} and sunset {sunset}."""
 
 
-url = f'https://api.openweathermap.org/data/2.5/weather?lat={lat}&lon={lon}&appid={key}&units=metric'
-
-response = requests.get(url)
-data = response.json()
-weather = data['weather'][0]['description']
-temp = data['main']['temp']
-sunset = datetime.fromtimestamp(data['sys']['sunset'])
-sunrise = datetime.fromtimestamp(data['sys']['sunrise'])
-# name = data['name'] # Sometimes too specific (getting districts of the city)
-
-pp(f'Current weather in {chosen_city} shows {weather}, with temp around {temp}C.')
-pp(f"Sunrise: {sunrise} and sunset {sunset}.")
-
+print(get_weather('Barcelona'))
