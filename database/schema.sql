@@ -6,7 +6,6 @@ CREATE TABLE users (
   name VARCHAR(255),
   email VARCHAR(255) UNIQUE,
   hashed_password BLOB,
-  city_id int
 );
 
 CREATE TABLE cities(
@@ -103,11 +102,6 @@ FOREIGN KEY (country_id) REFERENCES countries(id);
 ALTER TABLE country_languages
 ADD CONSTRAINT FK_country_languages2
 FOREIGN KEY (language_id) REFERENCES languages(id);
-
-
-ALTER TABLE users
-ADD constraint FK_user_city
-FOREIGN KEY (city_id) REFERENCES cities(id);
 
 ALTER TABLE messages
 add constraint fk_user_id_from
