@@ -2,6 +2,7 @@ from flask import Flask, flash, request, render_template, redirect
 from flask_login import LoginManager, UserMixin, login_user, logout_user, current_user, login_required
 from config import SECRET_KEY
 from HolidayHelper.database.users import add_user, email_available, get_user_with_credentials, get_user_by_id
+import weather_api
 
 app = Flask(__name__)
 app.secret_key = SECRET_KEY
@@ -120,6 +121,10 @@ def view_budapest():
 def view_prague():
     return render_template("prague.html", user=current_user)
 
+@app.route('/<city>/weather')
+def weather_output(city):
+    output = weather_api.get_weather(f'{city}')
+    return render_template('weather.html', content=output)
+
 if __name__ == '__main__':
     app.run(port=5002)
-
