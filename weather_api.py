@@ -34,8 +34,7 @@ def get_weather(chosen_city):
     sunrise = datetime.fromtimestamp(data['sys']['sunrise'])
     # name = data['name']           # Sometimes too specific (getting districts of the city)
 
-    return f"""Current weather in {chosen_city.capitalize()} shows {weather}, with temp around {temp}C.
-            Sunrise: {sunrise} and sunset {sunset}."""
+    return {'city': chosen_city.capitalize(), 'weather': weather.capitalize(), 'temp': round(float(temp), 1), 'sunrise': sunrise, 'sunset': sunset}
 
 
 
