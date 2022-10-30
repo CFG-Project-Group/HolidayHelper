@@ -19,15 +19,9 @@ def list_of_places(city):
                  "reference_id": item['photos'][0]['photo_reference']}
         list_of_tourist_places.append(place)
 
-    return list_of_tourist_places
+    return [list_of_tourist_places]
 
 
-def attractions(city):
-    attractions_city = list_of_places(city)
-    pass
-
-
-print(list_of_places("Budapest"))
 
 
 
