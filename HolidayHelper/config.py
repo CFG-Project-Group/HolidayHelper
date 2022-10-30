@@ -3,9 +3,9 @@ SECRET_KEY = 'secret-key'
 
 # Database connection information
 HOST = 'localhost'
-DATABASE = 'hh_accounts'
+DATABASE = 'HolidayHelper'
 USER = 'admin'
-PASSWORD = 'Oulala95'
+PASSWORD = 'admin'
 
 
 
