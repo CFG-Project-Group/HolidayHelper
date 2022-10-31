@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+
+* {
+  box-sizing: border-box;
+}
+
+/* Create four equal columns that floats next to each other */
+.column {
+  float: left;
+  width: 25%;
+  padding: 10px;
+  height: 400px; /* Should be removed. Only for demonstration */
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+/* Responsive layout - makes the four columns stack on top of each other instead of next to each other */
+@media screen and (max-width: 600px) {
+  .column {
+    width: 100%;
+  }
+}
+
+
+</style>
+</head>
+
+<body>
+
+    <center><h2 style="font-size:30px">Events in {{content[0]['city'].title()}}</h2></center>
+    <center><p style="font-family:verdana">Click on event for more info</p></center>
+<div class="row">
+  <div class="column" style="background-color:#aaa;">
+      <center><a href="{{content[1]['event_url']}}"><h2><font size ="+2">{{content[1]['name']}}</font></h2>
+        <p>{{content[1]['description']}} <br></p>
+          <p2>Start time: {{content[1]['start_time']}} <br></p2>
+        <img src="{{content[1]['image']}}"></img></a></center>
+  </div>
+  <div class="column" style="background-color:#bbb;">
+        <center><a href="{{content[2]['event_url']}}"><h2>{{content[2]['name']}}</h2>
+            <p>{{content[2]['description']}} <br></p>
+        <p2>Start time: {{content[2]['start_time']}} <br></p2>
+        <img src="{{content[2]['image']}}"></img></a></center>
+  </div>
+  <div class="column" style="background-color:#ccc;">
+        <center><a href="{{content[3]['event_url']}}"><h2>{{content[3]['name']}}</h2>
+            <p>{{content[3]['description']}} <br></p>
+        <p2>Start time: {{content[3]['start_time']}} <br></p2>
+      <img src="{{content[3]['image']}}"></img></a></center>
+  </div>
+  <div class="column" style="background-color:#ddd;">
+      <center><a href="{{content[4]['event_url']}}">
+      <h2>{{content[4]['name']}}</h2>
+          <p>{{content[4]['description']}} <br></p>
+        <p2>Start time: {{content[4]['start_time']}} <br></p2>
+      <img src="{{content[4]['image']}}"></img></a></center>
+  </div>
+</div>
+</body>
+</html>
