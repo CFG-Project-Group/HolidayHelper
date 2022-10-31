@@ -39,10 +39,10 @@
   </div>
 
   <div class="container h-100 d-flex flex-column justify-content-center align-items-center">
-    <h1 class="text-center">Ahoj, {{ user.name }}!</h1>
-    <h3 class="text-center">Czech out Prague!</h3>
+    <h1 class="text-center">Hi {{ user.name }}!</h1>
+    <h3 class="text-center">Welcome to {{ city.name|capitalize }}!</h3>
         <div>
-      <a role="button" href="/prague/weather" class="btn btn-dark"> Weather </a>
+      <a role="button" href="/city/{{ city.name }}/weather" class="btn btn-dark"> Weather </a>
     </div>
   </div>
 {% endblock %}
