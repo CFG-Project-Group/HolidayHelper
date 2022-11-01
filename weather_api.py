@@ -1,7 +1,6 @@
 import requests
 from database.db_connection import get_db_connection
 from datetime import datetime
-from flask import render_template
 
 
 def get_coordinates(city_name):
@@ -11,7 +10,7 @@ def get_coordinates(city_name):
         with connection.cursor(dictionary=True) as cursor:
             # Temporary code
             cursor.execute(f"""SELECT latitude, longitude FROM cities 
-                                WHERE name = '{city_name}'""")
+                                WHERE name = '{city_name.title()}'""")
             lat_long = cursor.fetchall()
             return lat_long
 
@@ -37,4 +36,4 @@ def get_weather(chosen_city):
     return {'city': chosen_city.capitalize(), 'weather': weather.capitalize(), 'temp': round(float(temp), 1), 'sunrise': sunrise, 'sunset': sunset}
 
 
-
+print(get_weather('London'))

@@ -34,5 +34,3 @@ def display_events(city):
     finally:
         return all_events
 
-
-print(display_events('Prague'))

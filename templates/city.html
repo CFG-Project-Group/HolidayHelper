@@ -42,12 +42,9 @@
     <h1 class="text-center">Hi {{ user.name }}!</h1>
     <h3 class="text-center">Welcome to {{ city.name|capitalize }}!</h3>
         <div>
-<<<<<<< HEAD:templates/city.html
-      <a role="button" href="/city/{{ city.name }}/weather" class="btn btn-dark"> Weather </a>
-=======
-      <a role="button" href="/budapest/weather" class="btn btn-dark"> Weather </a>
-          <a role="button" href="/barcelona/events" class="btn btn-dark"> Events </a>
->>>>>>> main:templates/budapest.html
+
+      <a role="button" href="/{{city.name}}/weather" class="btn btn-dark"> Weather </a>
+            <a role="button" href="/{{city.name}}/events" class="btn btn-dark"> Events </a>
     </div>
   </div>
 {% endblock %}
