@@ -18,8 +18,7 @@ login_manager.login_message_category = 'error'
 # #redirect takes users somewhere
 # #request above is for extracting info from the form that's associated with the request
 # # flash - flashes a message temporarily and is used for password management below
-# #the front-end language we're using is actually not html, very similar - ginger
-# # render_template allows to kinda glue base and html tabs together
+# # render_template allows to glue base and html tabs together
 # flask login module allows to save info of a user when they log in as a cookie and allows to then retrieve this info on our app and potentially use that info
 
 class User(UserMixin): #we're doing this to store a user's id as a cookie in order to then return the id
@@ -29,7 +28,7 @@ class User(UserMixin): #we're doing this to store a user's id as a cookie in ord
         self.name = user_details.get('name')
         self.email = user_details.get('email')
 
-# we need to access the info based on user's id by using some functionality from the login maanger:
+# we need to access the info based on user's id by using some functionality from the login manager:
 @login_manager.user_loader
 def user_loader(user_id):
     user_details = get_user_by_id(user_id) #basically get the user details from the database, get_user_by_id in useres tab,
@@ -82,13 +81,14 @@ def submit_signup():
     password = request.form.get('password')
     if len(password) < 8:
         flash("Passwords should be at least 8 characters long.", 'error') #flashing message, category error
-    elif not email_available(email): # we're making this function in the users.py tab
+    elif not email_available(email): # this function is in the users.py tab
         flash("An account with that email already exists.", 'error')
     else:
         add_user(name, email, password)
         flash("New account created.", 'info') #flashing message, category info
         return redirect('/login') # this works with redirect above and redirects the user to login page if the signup successful
     return redirect('/signup') #if it hasn't been redirected to any other page, eg thanks to above else code, if the if or elif code work then it will be redirected to signup page again
+
 
 
 @app.post('/logout')
@@ -103,29 +103,26 @@ def submit_logout():
 def view_profile():
     return render_template("profile.html", user=current_user) #user was an extra variable necessary in the profile.html definition
 
-@app.get('/barcelona')
-@login_required
-def view_barcelona():
-    return render_template("barcelona.html", user=current_user)
 
-@app.get('/london')
-@login_required
-def view_london():
-    return render_template("london.html", user=current_user)
 
-@app.get('/budapest')
+@app.get('/city/<city>')
 @login_required
-def view_budapest():
-    return render_template("budapest.html", user=current_user)
+def view_city(city):
+    if city not in ["prague", "london", "barcelona", "budapest"]:
+        return redirect("/city/<city>/error")
+    else:
+        return render_template("city.html", user=current_user, city={'name': city})
 
-@app.get('/prague')
+
+@app.get('/city/<city>/error')
 @login_required
-def view_prague():
-    return render_template("prague.html", user=current_user)
+def view_city_error(city):
+    return render_template("city_error.html", user=current_user, city={'name': city})
 
-@app.route('/<city>/weather')
+
+@app.route('/city/<city>/weather')
 def weather_output(city):
-    output = weather_api.get_weather(f'{city}')
+    output = weather_api.get_weather(city)
     return render_template('weather.html', content=output)
 
 @app.route('/<city>/events')
@@ -135,4 +132,4 @@ def events_output(city):
 
 
 if __name__ == '__main__':
-    app.run(port=5002)
+    app.run(port=5005)
