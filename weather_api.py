@@ -24,7 +24,7 @@ def get_coordinates(city_name):
 def get_weather(chosen_city):
     coordinates = get_coordinates(chosen_city)[0]
     API_key = APIkeys()
-    key = API_key.weather()
+    key = API_key.get_weather_key()
     lat = coordinates.get('latitude')
     lon = coordinates.get('longitude')
 
@@ -39,7 +39,6 @@ def get_weather(chosen_city):
 
     get_icon = WeatherPicture(weather)
     icon = get_icon.get_weather_picture()['image_address']
-    print(icon)
 
     return {'city': chosen_city.capitalize(), 'weather': weather.capitalize(), 'temp': round(float(temp), 1),
             'sunrise': sunrise, 'sunset': sunset, 'icon': icon}
