@@ -1,11 +1,10 @@
 import os
 from google.cloud import translate_v2
-from API_config import APIkeys
 
 
-API_key = APIkeys()
-key = API_key.get_translator_key()
-os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = key
+
+
+os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = r"GoogleKey.json"
 
 
 class Translator:
@@ -30,6 +29,8 @@ class Translator:
 
 
 translator = Translator()
-print(translator.spanish_translator("blue"))
-# # translator.hungarian_translator("difficult situation")
 
+#choosing spanish as an example
+
+if __name__ == '__main__':
+    print(translator.spanish_translator("blue"))
