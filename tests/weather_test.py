@@ -3,6 +3,7 @@ from unittest import TestCase, main, mock
 from io import StringIO
 from weather_api import get_coordinates, get_weather
 import json
+from weather_helpers.weather_helpers import WeatherPicture
 
 
 class MyTestGetCoordinates(TestCase):
@@ -28,6 +29,13 @@ class MyTestGetCoordinates(TestCase):
 
 
 class TestGetWeather(TestCase):
+    def test_api_keys(self):
+        """Checking if keys hasn't changed - not values as values are not constant"""
+
+        result = get_weather('London')
+        keys_to_compare = ['city', 'weather', 'temp', 'sunrise', 'sunset', 'icon']
+        self.assertEqual(list(result.keys()), keys_to_compare)
+
     def mock_weather_result(self, city):
         with open(f"mock_weather_{city}.json") as file:
             return json.load(file)
@@ -35,16 +43,53 @@ class TestGetWeather(TestCase):
     @mock.patch("weather_api.requests.get")
     def test_get_weather_barcelona(self, mock_get):
 
-        """Check if keys are the same - not values"""
-
-        fake_response = {'city': 'Barcelona', 'weather': "Few clouds", 'temp': 21.2,
-                              'sunrise': datetime.datetime(2022, 10, 26, 7, 15, 19),
-                              'sunset': datetime.datetime(2022, 10, 26, 17, 55, 2)}
+        expected_response = {'city': 'Barcelona', 'weather': "Few clouds", 'temp': 22.1,
+                              'sunrise': datetime.datetime(2022, 11, 1, 6, 22, 30),
+                              'sunset': datetime.datetime(2022, 11, 1, 16, 47, 12),
+                              'icon': 'https://cdn4.iconfinder.com/data/icons/the-weather-is-nice-today/64/weather_2-512.png'}
         my_mock_response = mock.Mock(status_code=200)
         my_mock_response.json.return_value = self.mock_weather_result('barcelona')
         mock_get.return_value = my_mock_response
-        response = get_weather(city='barcelona')
-        self.assertEqual(response, fake_response)
+        response = get_weather('barcelona')
+        self.assertEqual(response, expected_response)
+
+
+class WeatherHelperTest(TestCase):
+
+    def test_get_picture_address_snow(self):
+        weather_helper = WeatherPicture('snow')
+        picture_address_from_db = weather_helper.get_picture_address()['image_address']
+        address_to_compare = "https://cdn4.iconfinder.com/data/icons/the-weather-is-nice-today/64/weather_35-256.png"
+        self.assertEqual(picture_address_from_db, address_to_compare)
+
+    def test_get_picture_address_fog(self):
+        weather_helper = WeatherPicture('fog')
+        picture_address_from_db = weather_helper.get_picture_address()['image_address']
+        address_to_compare = "https://cdn4.iconfinder.com/data/icons/the-weather-is-nice-today/64/weather_30-256.png"
+        self.assertEqual(picture_address_from_db, address_to_compare)
+
+    def test_get_picture_address_light_rain(self):
+        weather_helper = WeatherPicture('light rain')
+        picture_address_from_db = weather_helper.get_picture_address()['image_address']
+        address_to_compare = "https://cdn4.iconfinder.com/data/icons/the-weather-is-nice-today/64/weather_7-512.png"
+        self.assertEqual(picture_address_from_db, address_to_compare)
+
+    def test_get_picture_address_clear_sky(self):
+        weather_helper = WeatherPicture('clear sky')
+        picture_address_from_db = weather_helper.get_picture_address()['image_address']
+        address_to_compare = "https://cdn4.iconfinder.com/data/icons/the-weather-is-nice-today/64/weather_3-512.png"
+        self.assertEqual(picture_address_from_db, address_to_compare)
+
+    def test_get_weather_picture_valid_input(self):
+        weather_helper = WeatherPicture('clear sky')
+        image = weather_helper.get_weather_picture()['image_address']
+        self.assertEqual(image, "https://cdn4.iconfinder.com/data/icons/the-weather-is-nice-today/64/weather_3-512.png")
+
+
+    def test_get_weather_picture_invalid_input(self):
+        weather_helper = WeatherPicture('hello')
+        image = weather_helper.get_weather_picture()
+        self.assertEqual(image, "https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-weather/draw2.webp")
 
 
 if __name__ == '__main__':

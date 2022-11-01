@@ -1,6 +1,8 @@
 import requests
 from database.db_connection import get_db_connection
 from datetime import datetime
+from weather_helpers.weather_helpers import WeatherPicture
+import json
 
 
 def get_coordinates(city_name):
@@ -33,7 +35,13 @@ def get_weather(chosen_city):
     sunrise = datetime.fromtimestamp(data['sys']['sunrise'])
     # name = data['name']           # Sometimes too specific (getting districts of the city)
 
-    return {'city': chosen_city.capitalize(), 'weather': weather.capitalize(), 'temp': round(float(temp), 1), 'sunrise': sunrise, 'sunset': sunset}
+    get_icon = WeatherPicture(weather)
+    icon = get_icon.get_weather_picture()['image_address']
+    print(icon)
+
+    return {'city': chosen_city.capitalize(), 'weather': weather.capitalize(), 'temp': round(float(temp), 1),
+            'sunrise': sunrise, 'sunset': sunset, 'icon': icon}
 
 
-print(get_weather('London'))
+if __name__ == '__main__':
+    print(get_weather('London'))
