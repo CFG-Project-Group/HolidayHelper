@@ -4,7 +4,7 @@ from API_config import APIkeys
 
 
 API_key = APIkeys()
-key = API_key.translator_key()
+key = API_key.get_translator_key()
 os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = key
 
 
