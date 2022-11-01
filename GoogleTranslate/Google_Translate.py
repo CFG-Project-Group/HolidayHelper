@@ -1,7 +1,12 @@
 import os
 from google.cloud import translate_v2
+from API_config import APIkeys
 
-os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = r"GoogleKey.json"
+
+API_key = APIkeys()
+key = API_key.translator_key()
+os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = key
+
 
 class Translator:
 
