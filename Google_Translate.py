@@ -29,8 +29,7 @@ class Translator:
         return output['translatedText'].lower()
 
 
-# #
-# translator = Translator()
-# print(translator.spanish_translator("blue"))
+translator = Translator()
+print(translator.spanish_translator("blue"))
 # # translator.hungarian_translator("difficult situation")
 
