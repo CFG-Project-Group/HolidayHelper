@@ -1,9 +1,11 @@
 import requests
+from API_config import APIkeys
 
 
 def get_events(city):
     """Gets events available in near future for chosen city"""
-    key = 'c9a9ef15fe0721edb35af6c9c9f0a781f8c47351325c21274dc679982d035be8'
+    API_key = APIkeys()
+    key = API_key.events_key()
     url = f"https://serpapi.com/search.json?engine=google_events&q=Events+in+{city}&hl=en&apikey={key}"
     response = requests.get(url)
     events = response.json()
@@ -33,4 +35,8 @@ def display_events(city):
         all_events.append("No events available")
     finally:
         return all_events
+
+
+if __name__ == '__main__':
+    print(display_events('London'))
 
