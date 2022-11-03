@@ -8,6 +8,11 @@ CREATE TABLE users (
   hashed_password BLOB
 );
 
+INSERT INTO users
+(name, email, hashed_password)
+VALUES
+('Test_User', 'test@gmail.com', '12345678');
+
 CREATE TABLE cities(
 id INT PRIMARY KEY auto_increment,
 name VARCHAR(50) NOT NULL,
