@@ -1,38 +1,43 @@
 import datetime
 from unittest import TestCase, main, mock
-from io import StringIO
-from weather_api import get_coordinates, get_weather
+from weather_api import GetWeatherInfo
 import json
 from weather_helpers.weather_helpers import WeatherPicture
 
 
 class MyTestGetCoordinates(TestCase):
     def test_get_coordinates_london(self):
-        self.assertEqual(f"{get_coordinates('London')}",
+        get_info = GetWeatherInfo()
+        self.assertEqual(f"{get_info.get_coordinates('London')}",
                          "[{'latitude': Decimal('51.5085'), 'longitude': Decimal('-0.1257')}]")  # add assertion here
 
     def test_get_coordinates_budapest(self):
-        self.assertEqual(f"{get_coordinates('Budapest')}",
+        get_info = GetWeatherInfo()
+        self.assertEqual(f"{get_info.get_coordinates('Budapest')}",
                          "[{'latitude': Decimal('47.4979'), 'longitude': Decimal('19.0402')}]")
 
     def test_get_coordinates_barcelona(self):
-        self.assertEqual(f"{get_coordinates('Barcelona')}",
+        get_info = GetWeatherInfo()
+        self.assertEqual(f"{get_info.get_coordinates('Barcelona')}",
                          "[{'latitude': Decimal('41.3874'), 'longitude': Decimal('2.1686')}]")
 
     def test_get_coordinates_prague(self):
-        self.assertEqual(f"{get_coordinates('Prague')}",
+        get_info = GetWeatherInfo()
+        self.assertEqual(f"{get_info.get_coordinates('Prague')}",
                          "[{'latitude': Decimal('50.0755'), 'longitude': Decimal('14.4378')}]")
 
     def test_get_coordinates_invalid_city(self):
-        self.assertEqual(f"{get_coordinates('Paris')}",
+        get_info = GetWeatherInfo()
+        self.assertEqual(f"{get_info.get_coordinates('Paris')}",
                              "[]")
 
 
 class TestGetWeather(TestCase):
     def test_api_keys(self):
+        get_weather_info = GetWeatherInfo()
         """Checking if keys hasn't changed - not values as values are not constant"""
 
-        result = get_weather('London')
+        result = get_weather_info.get_weather('London')
         keys_to_compare = ['city', 'weather', 'temp', 'sunrise', 'sunset', 'icon']
         self.assertEqual(list(result.keys()), keys_to_compare)
 
@@ -42,7 +47,7 @@ class TestGetWeather(TestCase):
 
     @mock.patch("weather_api.requests.get")
     def test_get_weather_barcelona(self, mock_get):
-
+        get_weather_info = GetWeatherInfo()
         expected_response = {'city': 'Barcelona', 'weather': "Few clouds", 'temp': 22.1,
                               'sunrise': datetime.datetime(2022, 11, 1, 6, 22, 30),
                               'sunset': datetime.datetime(2022, 11, 1, 16, 47, 12),
@@ -50,7 +55,22 @@ class TestGetWeather(TestCase):
         my_mock_response = mock.Mock(status_code=200)
         my_mock_response.json.return_value = self.mock_weather_result('barcelona')
         mock_get.return_value = my_mock_response
-        response = get_weather('barcelona')
+        response = get_weather_info.get_weather('barcelona')
+        self.assertEqual(response, expected_response)
+
+    @mock.patch("weather_api.requests.get")
+    def test_get_weather_london(self, mock_get):
+        get_weather_info = GetWeatherInfo()
+        expected_response = {'city': 'London',
+                             'icon': 'https://cdn4.iconfinder.com/data/icons/iconsland-weather/PNG/256x256/Overcast.png',
+                             'sunrise': datetime.datetime(2022, 10, 26, 7, 43, 1),
+                             'sunset': datetime.datetime(2022, 10, 26, 17, 45, 43),
+                             'temp': 14.0,
+                             'weather': 'Overcast clouds'}
+        my_mock_response = mock.Mock(status_code=200)
+        my_mock_response.json.return_value = self.mock_weather_result('london')
+        mock_get.return_value = my_mock_response
+        response = get_weather_info.get_weather('london')
         self.assertEqual(response, expected_response)
 
 
@@ -79,12 +99,6 @@ class WeatherHelperTest(TestCase):
         picture_address_from_db = weather_helper.get_picture_address()['image_address']
         address_to_compare = "https://cdn4.iconfinder.com/data/icons/the-weather-is-nice-today/64/weather_3-512.png"
         self.assertEqual(picture_address_from_db, address_to_compare)
-
-    def test_get_weather_picture_valid_input(self):
-        weather_helper = WeatherPicture('clear sky')
-        image = weather_helper.get_weather_picture()['image_address']
-        self.assertEqual(image, "https://cdn4.iconfinder.com/data/icons/the-weather-is-nice-today/64/weather_3-512.png")
-
 
     def test_get_weather_picture_invalid_input(self):
         weather_helper = WeatherPicture('hello')
