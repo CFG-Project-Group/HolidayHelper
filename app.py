@@ -4,7 +4,7 @@ from flask_login import LoginManager, UserMixin, login_user, logout_user, curren
 from config import SECRET_KEY
 from database.users import add_user, email_available, get_user_with_credentials, get_user_by_id
 import weather_api
-import events_try
+from events_try import Events
 
 app = Flask(__name__)
 app.secret_key = SECRET_KEY
@@ -127,7 +127,8 @@ def weather_output(city):
 
 @app.route('/<city>/events')
 def events_output(city):
-    output = events_try.display_events(f'{city}')
+    event = Events()
+    output = event.display_events(f'{city}')
     return render_template('events.html', content=output)
 
 
