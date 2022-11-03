@@ -3,7 +3,7 @@ from database.db_connection import get_db_connection
 from datetime import datetime
 from weather_helpers.weather_helpers import WeatherPicture
 import json
-from API_config import APIkeys
+from config import weather_key
 
 
 def get_coordinates(city_name):
@@ -23,12 +23,10 @@ def get_coordinates(city_name):
 
 def get_weather(chosen_city):
     coordinates = get_coordinates(chosen_city)[0]
-    API_key = APIkeys()
-    key = API_key.get_weather_key()
     lat = coordinates.get('latitude')
     lon = coordinates.get('longitude')
 
-    url = f'https://api.openweathermap.org/data/2.5/weather?lat={lat}&lon={lon}&appid={key}&units=metric'
+    url = f'https://api.openweathermap.org/data/2.5/weather?lat={lat}&lon={lon}&appid={weather_key}&units=metric'
     response = requests.get(url)
     data = response.json()
     weather = data['weather'][0]['description']

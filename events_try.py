@@ -1,12 +1,10 @@
 import requests
-from API_config import APIkeys
+from config import events_key
 
 
 def get_events(city):
     """Gets events available in near future for chosen city"""
-    API_key = APIkeys()
-    key = API_key.get_events_key()
-    url = f"https://serpapi.com/search.json?engine=google_events&q=Events+in+{city}&hl=en&apikey={key}"
+    url = f"https://serpapi.com/search.json?engine=google_events&q=Events+in+{city}&hl=en&apikey={events_key}"
     response = requests.get(url)
     events = response.json()
     events_result = events['events_results']

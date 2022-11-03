@@ -2,7 +2,7 @@ from flask import Flask, flash, request, render_template, redirect
 from flask_login import LoginManager, UserMixin, login_user, logout_user, current_user, login_required
 
 from config import SECRET_KEY
-from HolidayHelper.database.users import add_user, email_available, get_user_with_credentials, get_user_by_id
+from database.users import add_user, email_available, get_user_with_credentials, get_user_by_id
 import weather_api
 import events_try
 
