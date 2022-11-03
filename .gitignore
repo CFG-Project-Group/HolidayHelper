@@ -130,3 +130,6 @@ dmypy.json
 
 #Google API keys
 GoogleKey.json
+
+# config file
+config.py
