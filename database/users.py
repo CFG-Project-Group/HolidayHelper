@@ -1,5 +1,5 @@
 import bcrypt  # for making passwords more secure
-from HolidayHelper.database.db_connection import get_db_connection
+from database.db_connection import get_db_connection
 
 def add_user(name, email, password):
     """
@@ -8,12 +8,12 @@ def add_user(name, email, password):
     """
     with get_db_connection() as connection:
         with connection.cursor(dictionary=True) as cursor:
-            password_bytes = password.encode() # this converts my code into bites so I can has and salt later
-            hashed_password = bcrypt.hashpw(password_bytes, bcrypt.gensalt()) # this take my password bytes, adds a salt then hashes
+            password_bytes = password.encode()  # this converts my code into bites so I can hash and salt later
+            hashed_password = bcrypt.hashpw(password_bytes, bcrypt.gensalt())  # this take my password bytes, adds a salt then hashes
             cursor.execute("""INSERT
                                 INTO users
                                      (name, email, hashed_password)
-                              VALUES (%s, %s, %s)""", [name, email, hashed_password])  #the %s-s allow to avoid sql attacks, normally we would write VALUES ({name}, {email}..., but write it this way instead to avoid attacks
+                              VALUES (%s, %s, %s)""", [name, email, hashed_password]) # the %s-s allow to avoid sql attacks, normally we would write VALUES ({name}, {email}..., but write it this way instead to avoid attacks
             connection.commit()
 
 
@@ -48,7 +48,7 @@ def get_user_with_credentials(email, password):   # function to refer to in app 
 
 def get_user_by_id(user_id):
     """
-    Retrieves the user with the given id, if present.
+    If user is present retrieves the user with the given id,
     If there is no matching user, returns None.
     """
     with get_db_connection() as connection:
