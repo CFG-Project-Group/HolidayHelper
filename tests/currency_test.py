@@ -46,3 +46,5 @@ class TestExchangeRate(TestCase):
         self.assertEqual(response, result)
 #
 
+if __name__ == '__main__':
+    main()
