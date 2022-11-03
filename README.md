@@ -19,14 +19,9 @@ Use the terminal to install Python packages (or go to Python Packages and search
 - requests
 - google-cloud-translate
 
-Create new txt file called config.txt and insert your app key for weather and events API, which should look like this:
+Please create a config.py file using out config_template.py and fill in all keys necessary:
 
-![Picture1](https://user-images.githubusercontent.com/109172518/199459455-e020fe02-e89c-40df-9cfa-55d47cec3dba.png)
-
-
-For translator API you need to create a JSON called GoogleKey.json file with your key, which should look like this:
-
-![Picture2](https://user-images.githubusercontent.com/109172518/199459507-496fde9b-b68d-41d7-9d68-4791fea9944b.png)
+<img src=https://user-images.githubusercontent.com/109172518/199698623-6af66397-371a-4a34-9bea-8a0df0a2f49f.png width="380" height="300" />
 
 
 <h2> Helpful Documentation: </h2>
