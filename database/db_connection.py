@@ -1,5 +1,5 @@
 import mysql.connector
-from HolidayHelper.config import HOST, DATABASE, USER, PASSWORD
+from config import HOST, DATABASE, USER, PASSWORD
 
 
 def get_db_connection():
