@@ -1,6 +1,6 @@
 from flask import Flask, flash, request, render_template, redirect
 from flask_login import LoginManager, UserMixin, login_user, logout_user, current_user, login_required
-from config import SECRET_KEY, gmaps_key
+from config import SECRET_KEY, google_maps_key
 from database.users import add_user, email_available, get_user_with_credentials, get_user_by_id
 import weather_api
 import google_maps
@@ -8,7 +8,7 @@ import google_maps
 
 app = Flask(__name__)
 app.secret_key = SECRET_KEY
-app.config['GOOGLEMAPS_KEY'] = gmaps_keyQ
+
 
 login_manager = LoginManager()
 login_manager.init_app(app)
