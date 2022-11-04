@@ -4,6 +4,7 @@ from config import SECRET_KEY, google_maps_key
 from database.users import add_user, email_available, get_user_with_credentials, get_user_by_id
 from weather_api import GetWeatherInfo
 import google_maps
+from events_try import Events
 
 
 app = Flask(__name__)
@@ -121,8 +122,14 @@ def view_profile():
 
 def weather_output(city):
     get_info = GetWeatherInfo()
-    output = get_info.get_weather(city)
-    return output
+    output_weather = get_info.get_weather(city)
+    return output_weather
+
+def events_output(city):
+    event = Events()
+    output_for_events = event.display_events(f'{city}')
+    return output_for_events
+
 
 @app.get('/city/<city>')
 @login_required
@@ -130,7 +137,9 @@ def view_city(city):
     if city not in ["prague", "london", "barcelona", "budapest"]:
         return redirect("/city/<city>/error")
     else:
-        return render_template("city.html", user=current_user, city={'name': city}, weather=weather_output(city))
+        return render_template("city.html", user=current_user, city={'name': city},
+                               weather=weather_output(city), events=events_output(city)
+                               )
 
 
 @app.get('/city/<city>/error')
