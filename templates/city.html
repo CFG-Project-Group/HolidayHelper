@@ -22,8 +22,15 @@
                           <div class="col-6 p-4 border">currency</div>
                       </div>
                   </div>
-                  <div class="col-4 p-4 border">weather</div>
-              </div>
+                  <div class="col-4 p-4 border">
+                    <img src={{weather['icon']}} class="w-50"></img>
+                    <p class="h3 mb-4">{{weather['weather']}}</p>
+                    <p class="h5 mb-4">{{weather['city']}}</p>
+                    <p class="display-2"><strong>{{weather['temp']}} C</strong> </p>
+                    <p class="h5 mb-4">Sunrise: {{weather['sunrise']}} </p>
+                    <p class="h5 mb-4">Sunset: {{weather['sunset']}}</p>
+                  </div>
+                  </div>
               <div class="row">
                   <div class="col-6 p-4 border">
                       <div class="row">
@@ -46,47 +53,51 @@
       </div>
 
     <div>
-        <h3 class="display-1 text-capitalize fw-bold p-4" style="font-size: min(calc(1.5rem + 2.5vw), 3rem);"><span class="text-primary">Discover events</h3>
+        <h3 class="display-1 text-capitalize fw-bold p-4" style="font-size: min(calc(1.5rem + 2.5vw), 3rem);"><span class="text-primary">Discover events</span></h3>
     </div>
 
     <div class="row">
         <div class="col-3 p-4">
             <div class="card bg-warning">
                 <div class="card-body">
-                    <h5>Name of event</h5>
-                    <p>Description</p>
-                    <p>Date and Time</p>
-                    <img src="/static/images/Destinations_buckingham_palace.png" alt="Buckingham Palace" class="w-100" style="height: 200px; object-fit: cover;">
+                    <h5>{{events[1]['name']}}</h5>
+                    <p>{{events[1]['description']}}</p>
+                    <p>Date and Time: {{events[1]['start_time']}} </p>
+                    <a href="{{events[1]['event_url']}}">
+                    <img src="{{events[1]['image']}}" alt="Event" class="w-100" style="height: 200px; object-fit: cover;"></a>
                 </div>
             </div>
         </div>
         <div class="col-3 p-4">
             <div class="card bg-warning">
                 <div class="card-body">
-                    <h5>Name of event</h5>
-                    <p>Description</p>
-                    <p>Date and Time</p>
-                    <img src="/static/images/Destinations_buckingham_palace.png" alt="Buckingham Palace" class="w-100" style="height: 200px; object-fit: cover;">
+                    <h5>{{events[2]['name']}}</h5>
+                    <p>{{events[2]['description']}}</p>
+                    <p>Date and Time: {{events[2]['start_time']}} </p>
+                    <a href="{{events[2]['event_url']}}">
+                    <img src="{{events[2]['image']}}" alt="Event" class="w-100" style="height: 200px; object-fit: cover;"></a>
                 </div>
             </div>
         </div>
         <div class="col-3 p-4">
             <div class="card bg-warning">
                 <div class="card-body">
-                    <h5>Name of event</h5>
-                    <p>Description</p>
-                    <p>Date and Time</p>
-                    <img src="/static/images/Destinations_buckingham_palace.png" alt="Buckingham Palace" class="w-100" style="height: 200px; object-fit: cover;">
+                    <h5>{{events[3]['name']}}</h5>
+                    <p>{{events[3]['description']}}</p>
+                    <p>Date and Time: {{events[3]['start_time']}} </p>
+                    <a href="{{events[3]['event_url']}}">
+                    <img src="{{events[3]['image']}}" alt="Event" class="w-100" style="height: 200px; object-fit: cover;"></a>
                 </div>
             </div>
         </div>
         <div class="col-3 p-4">
             <div class="card bg-warning">
                 <div class="card-body">
-                    <h5>Name of event</h5>
-                    <p>Description</p>
-                    <p>Date and Time</p>
-                    <img src="/static/images/Destinations_buckingham_palace.png" alt="Buckingham Palace" class="w-100" style="height: 200px; object-fit: cover;">
+                    <h5>{{events[4]['name']}}</h5>
+                    <p>{{events[4]['description']}}</p>
+                    <p>Date and Time: {{events[4]['start_time']}} </p>
+                    <a href="{{events[4]['event_url']}}">
+                    <img src="{{events[4]['image']}}" alt="Event" class="w-80" style="height: 200px; object-fit: cover;"></a>
                 </div>
             </div>
         </div>
@@ -94,7 +105,7 @@
 
 
         <div>
-            <h3 class="display-1 text-capitalize fw-bold p-4" style="font-size: min(calc(1.5rem + 2.5vw), 3rem);"><span class="text-primary">Attractions</h3>
+            <h3 class="display-1 text-capitalize fw-bold p-4" style="font-size: min(calc(1.5rem + 2.5vw), 3rem);"><span class="text-primary">Attractions</span></h3>
         </div>
         <div class="row">
             <div class="col-3 p-4">
