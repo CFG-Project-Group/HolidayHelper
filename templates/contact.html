@@ -1,0 +1,67 @@
+{% extends 'base.html' %}
+{% block title %}Contact{% endblock %}
+{% block body %}
+  <main class="h-100">
+    <div class="bg-info">
+      <div class="container py-5">
+        <h1 class="display-5 fw-bold text-center text-sm-start pb-5">Get in touch with us</h1>
+        <div style="position: relative;">
+          <div class="row" style="position: absolute; top: 0; left: 0; right: 0; padding-bottom: 6.5rem;">
+            <div class="col-lg-6">
+              <form method="post" action="/message" class="bg-secondary p-3 rounded">
+                <h3>Send us a message</h3>
+                <div class="row">
+                  <div class="col-sm mb-4 mb-sm-3">
+                    <div class="form-floating">
+                      <input type="text" class="form-control bg-secondary text-light border-0 border-bottom rounded-0" name="first_name" id="first_name" placeholder="First name" required>
+                      <label for="first_name">First name</label>
+                    </div>
+                  </div>
+                  <div class="col-sm mb-4 mb-sm-3">
+                    <div class="form-floating">
+                      <input type="text" class="form-control bg-secondary text-light border-0 border-bottom rounded-0" name="last_name" id="last_name" placeholder="Last name" required>
+                      <label for="last_name">Last name</label>
+                    </div>
+                  </div>
+                </div>
+                <div class="form-floating mb-4">
+                  <input type="email" class="form-control bg-secondary text-light border-0 border-bottom rounded-0" name="email" id="message_email" placeholder="Email" required>
+                  <label for="message_email">Email</label>
+                </div>
+                <div class="form-floating mb-4">
+                  <textarea class="form-control bg-secondary text-light" placeholder="Message" name="message" id="message" style="height: 7.5rem;" required></textarea>
+                  <label for="message">Message</label>
+                </div>
+                <button type="submit" class="btn btn-info d-block mx-auto px-5">Send</button>
+              </form>
+            </div>
+            <div class="col-lg-6">
+              <div class="mt-5 p-lg-5 text-center text-lg-start">
+                <h4 class="mb-5">Contact info</h4>
+                <p class="lead">Phone: <span class="text-primary ms-2">+234 706338**</span></p>
+                <p class="lead">Email: <a href="mailto:holidayhelper@gmail.com" class="text-decoration-none ms-2">holidayhelper@<wbr>gmail.com</a></p>
+                <p class="lead">Socials:
+                  <span class="text-primary">
+                    <i class="fa-brands fa-instagram ms-2"></i>
+                    <i class="fa-brands fa-facebook-messenger ms-2"></i>
+                    <i class="fa-brands fa-figma ms-2"></i>
+                    <i class="fa-brands fa-behance ms-2"></i>
+                  </span>
+                </p>
+              </div>
+            </div>
+            <div class="col-12 text-center mt-5">
+              <form method="post" action="/subscribe" class="mx-auto" style="max-width: 400px;">
+                <h5 class="mb-3">Stay updated</h5>
+                <div class="input-group mb-3">
+                  <input type="email" class="form-control" name="email" id="subscribe_email" placeholder="Enter your email" style="border-top-left-radius: 19px; border-bottom-left-radius: 19px;" required>
+                  <button type="submit" class="btn btn-info" style="border-top-right-radius: 19px; border-bottom-right-radius: 19px;">Subscribe</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+{% endblock %}

@@ -1,51 +1,15 @@
 {% extends 'base.html' %}
-{% block title %}Home{% endblock %}
+{% block title %}Destinations{% endblock %}
 {% block body %}
-  <style>
-  body {
-    margin: 0;
-    font-family: Arial, Helvetica, sans-serif;
-  }
-
-  .topnav {
-    overflow: hidden;
-    background-color: #333;
-  }
-
-  .topnav a {
-    float: left;
-    color: #f2f2f2;
-    text-align: center;
-    padding: 14px 16px;
-    text-decoration: none;
-    font-size: 17px;
-  }
-
-  .topnav a:hover {
-    background-color: #ddd;
-    color: black;
-  }
-
-  .topnav a.active {
-    background-color: #04AA6D;
-    color: white;
-  }
-  </style>
-  <div class="topnav">
-    <a class="active" href="/profile">Holiday Helper</a>
-    <form action="/logout" method="post">
-      <button type="submit" class="btn btn-dark">Logout</button>
-    </form>
-  </div>
-
-  <div class="container h-100 d-flex flex-column justify-content-center align-items-center">
-    <h1 class="text-center">Welcome, {{ user.name }}!</h1>
-    <p class="text-center">Pick your desired destination to see more information.</p>
-    <div>
-      <a role="button" href="/city/barcelona" class="btn btn-dark">Barcelona</a> <!--a - anchor tag, linking to some other part of a page-->
-      <a role="button" href="/city/london" class="btn btn-dark">London</a>
-      <a role="button" href="/city/budapest" class="btn btn-dark">Budapest</a>
-      <a role="button" href="/city/prague" class="btn btn-dark">Prague</a>
-    </div>
-  </div>
+  <main class="h-100 py-5">
+        <div class="container h-100 d-flex flex-column align-items-center text-center">
+        <div class="col-md-4 my-auto">
+          <div class="card bg-warning text-center">
+            <div class="card-body">
+              <img src="/static/images/blank-profile-picture.webp" alt="Blank Profile Picture" style="height: 200px; width: 200px; object-fit: cover;" class="rounded-circle">
+              <h5 class="card-title my-2 pt-5">{{user.name}}</h5>
+              <p class="card-text">&ensp;{{user.email}}</p>
+            </div>
+          </div>
+  </main>
 {% endblock %}

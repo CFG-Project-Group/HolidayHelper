@@ -1,50 +1,140 @@
 {% extends 'base.html' %}
-{% block title %}Home{% endblock %}
+{% block title %}Destinations{% endblock %}
 {% block body %}
-  <style>
-  body {
-    margin: 0;
-    font-family: Arial, Helvetica, sans-serif;
-  }
 
-  .topnav {
-    overflow: hidden;
-    background-color: #333;
-  }
+  <main class="h-100 py-3">
+    <div class="container-fluid h-100 d-flex flex-column px-5 text-center">
+      <div>
+        <h1 class="display-1 text-capitalize fw-bold pb-4" style="font-size: min(calc(1.75rem + 3vw), 4rem);"><span class="text-primary">Discover </span>{{city.name.capitalize()}}</h1>
+      </div>
 
-  .topnav a {
-    float: left;
-    color: #f2f2f2;
-    text-align: center;
-    padding: 14px 16px;
-    text-decoration: none;
-    font-size: 17px;
-  }
+      <div class="row">
+          <div class="col-6 p-4 border">Maps</div>
+          <div class="col-6 p-4 border">
+              <div class="row">
+                  <div class="col-8 p-4 border">
+                      <div class="row">
+                          <div class="col-6 p-4 border">amount</div>
+                          <div class="col-6 p-4 border">currency</div>
+                      </div>
+                      <div class="row">
+                          <div class="col-6 p-4 border">amount</div>
+                          <div class="col-6 p-4 border">currency</div>
+                      </div>
+                  </div>
+                  <div class="col-4 p-4 border">weather</div>
+              </div>
+              <div class="row">
+                  <div class="col-6 p-4 border">
+                      <div class="row">
+                          <div class="col-12 p-1 border">Language1</div>
+                      </div>
+                      <div class="row">
+                          <div class="col-12 p-4 border">Sentence1</div>
+                      </div>
+                  </div>
+                  <div class="col-6 p-4 border">
+                      <div class="row">
+                          <div class="col-12 p-1 border">Language2</div>
+                      </div>
+                      <div class="row">
+                          <div class="col-12 p-4 border">Sentence2</div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
 
-  .topnav a:hover {
-    background-color: #ddd;
-    color: black;
-  }
-
-  .topnav a.active {
-    background-color: #04AA6D;
-    color: white;
-  }
-  </style>
-  <div class="topnav">
-    <a class="active" href="/profile">Holiday Helper</a>
-    <form action="/logout" method="post">
-      <button type="submit" class="btn btn-dark">Logout</button>
-    </form>
-  </div>
-
-  <div class="container h-100 d-flex flex-column justify-content-center align-items-center">
-    <h1 class="text-center">Hi {{ user.name }}!</h1>
-    <h3 class="text-center">Welcome to {{ city.name|capitalize }}!</h3>
-        <div>
-
-      <a role="button" href="/{{city.name}}/weather" class="btn btn-dark"> Weather </a>
-            <a role="button" href="/{{city.name}}/events" class="btn btn-dark"> Events </a>
+    <div>
+        <h3 class="display-1 text-capitalize fw-bold p-4" style="font-size: min(calc(1.5rem + 2.5vw), 3rem);"><span class="text-primary">Discover events</h3>
     </div>
-  </div>
+
+    <div class="row">
+        <div class="col-3 p-4">
+            <div class="card bg-warning">
+                <div class="card-body">
+                    <h5>Name of event</h5>
+                    <p>Description</p>
+                    <p>Date and Time</p>
+                    <img src="/static/images/Destinations_buckingham_palace.png" alt="Buckingham Palace" class="w-100" style="height: 200px; object-fit: cover;">
+                </div>
+            </div>
+        </div>
+        <div class="col-3 p-4">
+            <div class="card bg-warning">
+                <div class="card-body">
+                    <h5>Name of event</h5>
+                    <p>Description</p>
+                    <p>Date and Time</p>
+                    <img src="/static/images/Destinations_buckingham_palace.png" alt="Buckingham Palace" class="w-100" style="height: 200px; object-fit: cover;">
+                </div>
+            </div>
+        </div>
+        <div class="col-3 p-4">
+            <div class="card bg-warning">
+                <div class="card-body">
+                    <h5>Name of event</h5>
+                    <p>Description</p>
+                    <p>Date and Time</p>
+                    <img src="/static/images/Destinations_buckingham_palace.png" alt="Buckingham Palace" class="w-100" style="height: 200px; object-fit: cover;">
+                </div>
+            </div>
+        </div>
+        <div class="col-3 p-4">
+            <div class="card bg-warning">
+                <div class="card-body">
+                    <h5>Name of event</h5>
+                    <p>Description</p>
+                    <p>Date and Time</p>
+                    <img src="/static/images/Destinations_buckingham_palace.png" alt="Buckingham Palace" class="w-100" style="height: 200px; object-fit: cover;">
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+        <div>
+            <h3 class="display-1 text-capitalize fw-bold p-4" style="font-size: min(calc(1.5rem + 2.5vw), 3rem);"><span class="text-primary">Attractions</h3>
+        </div>
+        <div class="row">
+            <div class="col-3 p-4">
+                <div class="card bg-warning">
+                    <div class="card-body">
+                        <img src="/static/images/Destinations_buckingham_palace.png" alt="Buckingham Palace" class="w-100" style="height: 200px; object-fit: cover;">
+                        <h5>Name of attraction</h5>
+                        <p>Address</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-3 p-4">
+                <div class="card bg-warning">
+                    <div class="card-body">
+                        <img src="/static/images/Destinations_buckingham_palace.png" alt="Buckingham Palace" class="w-100" style="height: 200px; object-fit: cover;">
+                        <h5>Name of attraction</h5>
+                        <p>Address</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-3 p-4">
+                <div class="card bg-warning">
+                    <div class="card-body">
+                        <img src="/static/images/Destinations_buckingham_palace.png" alt="Buckingham Palace" class="w-100" style="height: 200px; object-fit: cover;">
+                        <h5>Name of attraction</h5>
+                        <p>Address</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-3 p-4">
+                <div class="card bg-warning">
+                    <div class="card-body">
+                        <img src="/static/images/Destinations_buckingham_palace.png" alt="Buckingham Palace" class="w-100" style="height: 200px; object-fit: cover;">
+                        <h5>Name of attraction</h5>
+                        <p>Address</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+  </main>
+
 {% endblock %}
