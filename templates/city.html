@@ -22,8 +22,15 @@
                           <div class="col-6 p-4 border">currency</div>
                       </div>
                   </div>
-                  <div class="col-4 p-4 border">weather</div>
-              </div>
+                  <div class="col-4 p-4 border">
+                    <img src={{weather['icon']}} class="w-50"></img>
+                    <p class="h3 mb-4">{{weather['weather']}}</p>
+                    <p class="h5 mb-4">{{weather['city']}}</p>
+                    <p class="display-2"><strong>{{weather['temp']}} C</strong> </p>
+                    <p class="h5 mb-4">Sunrise: {{weather['sunrise']}} </p>
+                    <p class="h5 mb-4">Sunset: {{weather['sunset']}}</p>
+                  </div>
+                  </div>
               <div class="row">
                   <div class="col-6 p-4 border">
                       <div class="row">
