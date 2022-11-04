@@ -35,12 +35,10 @@ def display_attractions(city):
     for item in list_of_attractions:
         name = item[0]
         address = item[3],
-        photo_reference = f"https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photo_reference={item[2]}&key=AIzaSyAsqDyB0mVXl9gbM_jyGV9W2Ocxa4BQaXQ"
+        photo_reference = f"https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photo_reference={item[2]}&key={google_maps_key}"
         attraction_attributes.append({'name': name, 'address': address, 'image': photo_reference})
 
     return attraction_attributes
-
-
 
 
 
