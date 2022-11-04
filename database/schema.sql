@@ -116,11 +116,6 @@ ALTER TABLE messages
 add constraint fk_user_id_to
 foreign key (user_id_to) references users(id);
 
-ALTER TABLE cities
-ADD CONSTRAINT FK_country
-FOREIGN KEY (country_id) REFERENCES countries(id);
-
-
 CREATE TABLE IF NOT EXISTS weather_images (
 weather_condition VARCHAR(50) unique primary key,
 image_address VARCHAR(1000));
