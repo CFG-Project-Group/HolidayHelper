@@ -2,7 +2,7 @@ from flask import Flask, flash, request, render_template, redirect
 from flask_login import LoginManager, UserMixin, login_user, logout_user, current_user, login_required
 from config import SECRET_KEY, google_maps_key
 from database.users import add_user, email_available, get_user_with_credentials, get_user_by_id
-import weather_api
+from weather_api import GetWeatherInfo
 import google_maps
 
 
@@ -119,6 +119,10 @@ def submit_signout():
 def view_profile():
     return render_template("profile.html", user=current_user)
 
+def weather_output(city):
+    get_info = GetWeatherInfo()
+    output = get_info.get_weather(city)
+    return output
 
 @app.get('/city/<city>')
 @login_required
@@ -126,7 +130,7 @@ def view_city(city):
     if city not in ["prague", "london", "barcelona", "budapest"]:
         return redirect("/city/<city>/error")
     else:
-        return render_template("city.html", user=current_user, city={'name': city})
+        return render_template("city.html", user=current_user, city={'name': city}, weather=weather_output(city))
 
 
 @app.get('/city/<city>/error')
@@ -135,11 +139,6 @@ def view_city_error(city):
     return render_template("city_error.html", user=current_user, city={'name': city})
 
 
-@app.route('/city/<city>/weather')
-def weather_output(city):
-    output = weather_api.get_weather(city)
-    return render_template('weather.html', content=output)
-
-
 if __name__ == '__main__':
     app.run(port=5005)
+
