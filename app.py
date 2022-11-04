@@ -4,6 +4,7 @@ from config import SECRET_KEY, google_maps_key
 from database.users import add_user, email_available, get_user_with_credentials, get_user_by_id
 from weather_api import GetWeatherInfo
 import google_maps
+import folium
 from events_try import Events
 
 
@@ -130,6 +131,18 @@ def events_output(city):
     output_for_events = event.display_events(f'{city}')
     return output_for_events
 
+def attractions(city):
+    output_for_attractions = google_maps.display_attractions(city)
+    return output_for_attractions
+
+def maps(city):
+    map_center = google_maps.geocode_city(city)
+    list_of_places = google_maps.list_of_places(city)
+    folium_map = folium.Map(location=map_center, tiles = 'openstreetmap', zoom_start=12)
+    for item in list_of_places:
+            folium.Marker(location=item[1], popup=item[0]).add_to(folium_map)
+    return folium_map._repr_html_()
+
 
 @app.get('/destinations/<city>')
 @login_required
@@ -138,7 +151,7 @@ def view_city(city):
         return redirect("/city/<city>/error")
     else:
         return render_template("city.html", user=current_user, city={'name': city},
-                               weather=weather_output(city), events=events_output(city)
+                               weather=weather_output(city), events=events_output(city), attractions=attractions(city), maps = maps(city)
                                )
 
 
