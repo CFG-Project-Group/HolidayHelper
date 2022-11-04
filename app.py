@@ -3,7 +3,7 @@ from flask_login import LoginManager, UserMixin, login_user, logout_user, curren
 
 from config import SECRET_KEY
 from database.users import add_user, email_available, get_user_with_credentials, get_user_by_id
-import weather_api
+from weather_api import GetWeatherInfo
 from events_try import Events
 
 app = Flask(__name__)
@@ -122,7 +122,8 @@ def view_city_error(city):
 
 @app.route('/<city>/weather')
 def weather_output(city):
-    output = weather_api.get_weather(city)
+    get_info = GetWeatherInfo()
+    output = get_info.get_weather(city)
     return render_template('weather.html', content=output)
 
 @app.route('/<city>/events')
