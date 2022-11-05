@@ -9,7 +9,7 @@
       </div>
 
       <div class="row">
-          <div class="col-6 p-4 border">Maps</div>
+          <div class="col-6 p-4 border">{{maps|safe}}</div>
           <div class="col-6 p-4 border">
               <div class="row">
                   <div class="col-8 p-4 border">
@@ -111,36 +111,36 @@
             <div class="col-3 p-4">
                 <div class="card bg-warning">
                     <div class="card-body">
-                        <img src="/static/images/Destinations_buckingham_palace.png" alt="Buckingham Palace" class="w-100" style="height: 200px; object-fit: cover;">
-                        <h5>Name of attraction</h5>
-                        <p>Address</p>
+                        <img src="{{attractions[0]['image']}}" class="w-100" style="height: 200px; object-fit: cover;">
+                        <h5>{{attractions[0]['name']}}</h5>
+                        <p>{{attractions[0]['address']}}</p>
                     </div>
                 </div>
             </div>
             <div class="col-3 p-4">
                 <div class="card bg-warning">
                     <div class="card-body">
-                        <img src="/static/images/Destinations_buckingham_palace.png" alt="Buckingham Palace" class="w-100" style="height: 200px; object-fit: cover;">
-                        <h5>Name of attraction</h5>
-                        <p>Address</p>
+                        <img src="{{attractions[1]['image']}}" class="w-100" style="height: 200px; object-fit: cover;">
+                        <h5>{{attractions[1]['name']}}</h5>
+                        <p>{{attractions[1]['address']}}</p>
                     </div>
                 </div>
             </div>
             <div class="col-3 p-4">
                 <div class="card bg-warning">
                     <div class="card-body">
-                        <img src="/static/images/Destinations_buckingham_palace.png" alt="Buckingham Palace" class="w-100" style="height: 200px; object-fit: cover;">
-                        <h5>Name of attraction</h5>
-                        <p>Address</p>
+                        <img src="{{attractions[2]['image']}}" class="w-100" style="height: 200px; object-fit: cover;">
+                        <h5>{{attractions[2]['name']}}</h5>
+                        <p>{{attractions[2]['address']}}</p>
                     </div>
                 </div>
             </div>
             <div class="col-3 p-4">
                 <div class="card bg-warning">
                     <div class="card-body">
-                        <img src="/static/images/Destinations_buckingham_palace.png" alt="Buckingham Palace" class="w-100" style="height: 200px; object-fit: cover;">
-                        <h5>Name of attraction</h5>
-                        <p>Address</p>
+                        <img src="{{attractions[3]['image']}}" class="w-100" style="height: 200px; object-fit: cover;">
+                        <h5>{{attractions[3]['name']}}</h5>
+                        <p>{{attractions[3]['address']}}</p>
                     </div>
                 </div>
             </div>

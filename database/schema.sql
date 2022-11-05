@@ -100,7 +100,6 @@ ALTER TABLE users
 ADD constraint FK_user_city
 FOREIGN KEY (city_id) REFERENCES cities(id);
 
-
 CREATE TABLE IF NOT EXISTS weather_images (
 weather_condition VARCHAR(50) unique primary key,
 image_address VARCHAR(1000));
