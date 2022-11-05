@@ -6,6 +6,7 @@ from weather_api import GetWeatherInfo
 import google_maps
 import folium
 from events_try import Events
+from database.db_connection import get_db_connection
 
 
 app = Flask(__name__)
@@ -63,7 +64,12 @@ def submit_message():
     email = request.form.get('email')
     message = request.form.get('message')
     if first_name and last_name and email and message:
-        '''Enter message into database'''
+        with get_db_connection() as connection:
+            with connection.cursor(dictionary=True) as cursor:
+                cursor.execute("""INSERT INTO messages
+                                         (email, first_name, last_name, message)
+                                  VALUES (%s, %s, %s, %s)""", [email, first_name, last_name, message]) # the %s-s allow to avoid sql attacks, normally we would write VALUES ({email}..., but write it this way instead to avoid attacks
+                connection.commit()
     return redirect('/contact')
 
 
@@ -71,7 +77,12 @@ def submit_message():
 def submit_subscribe():
     email = request.form.get('email')
     if email:
-        '''Enter email into database'''
+        with get_db_connection() as connection:
+            with connection.cursor(dictionary=True) as cursor:
+                cursor.execute("""INSERT INTO subscriptions
+                                         (email)
+                                  VALUES (%s)""", [email]) # the %s-s allow to avoid sql attacks, normally we would write VALUES ({email}..., but write it this way instead to avoid attacks
+                connection.commit()
     return redirect('/contact')
 
 
@@ -140,7 +151,7 @@ def maps(city):
     list_of_places = google_maps.list_of_places(city)
     folium_map = folium.Map(location=map_center, tiles = 'openstreetmap', zoom_start=12)
     for item in list_of_places:
-            folium.Marker(location=item[1], popup=item[0]).add_to(folium_map)
+        folium.Marker(location=item[1], popup=item[0]).add_to(folium_map)
     return folium_map._repr_html_()
 
 

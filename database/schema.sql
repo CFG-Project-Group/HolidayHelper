@@ -5,13 +5,9 @@ CREATE TABLE users (
   id INTEGER PRIMARY KEY AUTO_INCREMENT,
   name VARCHAR(255),
   email VARCHAR(255) UNIQUE,
-  hashed_password BLOB
+  hashed_password BLOB,
+  city_id int
 );
-
-INSERT INTO users
-(name, email, hashed_password)
-VALUES
-('Test_User', 'test@gmail.com', '12345678');
 
 CREATE TABLE cities(
 id INT PRIMARY KEY auto_increment,
@@ -43,14 +39,6 @@ id int PRIMARY KEY auto_increment,
 language_name VARCHAR(50) UNIQUE
 );
 
-
-CREATE TABLE messages (
-id inT PRIMARY KEY auto_increment,
-user_id_from int,
-user_id_to int,
-timestamp datetime,
-content varchar(1000)
-);
 
 INSERT INTO cities
 (name, latitude, longitude, country_id)
@@ -108,17 +96,14 @@ ALTER TABLE country_languages
 ADD CONSTRAINT FK_country_languages2
 FOREIGN KEY (language_id) REFERENCES languages(id);
 
-ALTER TABLE messages
-add constraint fk_user_id_from
-foreign key (user_id_from) references users(id);
-
-ALTER TABLE messages
-add constraint fk_user_id_to
-foreign key (user_id_to) references users(id);
+ALTER TABLE users
+ADD constraint FK_user_city
+FOREIGN KEY (city_id) REFERENCES cities(id);
 
 CREATE TABLE IF NOT EXISTS weather_images (
 weather_condition VARCHAR(50) unique primary key,
 image_address VARCHAR(1000));
+
 
 INSERT INTO weather_images VALUES
     ('thunderstorm with light rain','https://cdn4.iconfinder.com/data/icons/the-weather-is-nice-today/64/weather_17-512.png'),
@@ -171,3 +156,17 @@ INSERT INTO weather_images VALUES
     ('scattered clouds','https://cdn4.iconfinder.com/data/icons/the-weather-is-nice-today/64/weather_1-512.png'),
     ('broken clouds','https://cdn4.iconfinder.com/data/icons/the-weather-is-nice-today/64/weather_1-512.png'),
     ('overcast clouds','https://cdn4.iconfinder.com/data/icons/iconsland-weather/PNG/256x256/Overcast.png');
+
+CREATE TABLE IF NOT EXISTS subscriptions(
+	id int auto_increment primary key,
+    email varchar(250) unique
+    );
+
+
+CREATE TABLE IF NOT EXISTS messages(
+	id INT AUTO_INCREMENT PRIMARY KEY,
+    email VARCHAR(250) NOT NUll,
+    first_name VARCHAR(50) NOT NULL,
+    last_name VARCHAR(50) NOT NULL,
+    message VARCHAR(1000) NOT NULL
+    );
