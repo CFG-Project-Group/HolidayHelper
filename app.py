@@ -172,9 +172,12 @@ def view_city(city):
 @login_required
 def view_city_error(city):
     return render_template("city_error.html", user=current_user, city={'name': city})
+
+
 @app.get('/translate')
 def view_translate():
     return render_template("translation.html", result={'detectedSourceLanguage': "en"}, title="translate", user=current_user)
+
 
 @app.post('/translate')
 def submit_translate():
@@ -194,6 +197,8 @@ def currency_convert():
         to_currency = request.form["to"]
         converted_currency = exchanging(amount, from_currency, to_currency)
     return render_template("currencyconversion.html", title="Translator", user=current_user, converted_output=converted_currency)
+
+
 def currency_conversion(from_currency, to_currency, amount):
     converted_currency = exchanging(amount, from_currency, to_currency)
     return converted_currency

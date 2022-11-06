@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-{% block title %}Destinations{% endblock %}
+{% block title %}City{% endblock %}
 {% block body %}
 
   <main class="h-100 py-3">
@@ -9,69 +9,57 @@
       </div>
 
       <div class="row">
-          <div class="col-6 p-4 border">{{maps|safe}}</div>
-          <div class="col-6 p-4 border">
-              <div class="row">
-                  <div class="col-8 p-4 border">
-                      <div class="row">
-                          <div class="col-6 p-4 border">amount</div>
-                          <div class="col-6 p-4 border">currency</div>
-                      </div>
-                      <div class="row">
-                          <div class="col-6 p-4 border">amount</div>
-                          <div class="col-6 p-4 border">currency</div>
-                      </div>
-                  </div>
-                  <div class="col-4 p-4 border">
-                    <img src={{weather['icon']}} class="w-50"></img>
-                    <p class="h3 mb-4">{{weather['weather']}}</p>
-                    <p class="h5 mb-4">{{weather['city']}}</p>
-                    <p class="display-2"><strong>{{weather['temp']}} C</strong> </p>
-                    <p class="h5 mb-4">Sunrise: {{weather['sunrise']}} </p>
-                    <p class="h5 mb-4">Sunset: {{weather['sunset']}}</p>
-                  </div>
-                  </div>
-              <div class="row">
-                  <div class="col-6 p-4 border">
-                      <div class="row">
-                          <div class="col-12 p-1 border">Language1</div>
-                      </div>
-                      <div class="row">
-                          <div class="col-12 p-4 border">Sentence1</div>
-                      </div>
-                  </div>
-                  <div class="col-6 p-4 border">
-                      <div class="row">
-                          <div class="col-12 p-1 border">Language2</div>
-                      </div>
-                      <div class="row">
-                          <div class="col-12 p-4 border">Sentence2</div>
-                      </div>
+          <div class="col-8 p-4">
+              <div class="card bg-warning">
+                  <div class="card-body">
+                      <h4 class="text-primary">Attractions on Map</h4>
+                      {{maps|safe}}>
                   </div>
               </div>
           </div>
+          <div class="col-4 p-4">
+              <div class="row">
+                  <div class="card bg-warning p-4 mb-4">
+                    <div class="card-body">
+                        <img src={{weather['icon']}} class="w-25"></img>
+                        <p class="h4 mb-4">{{weather['weather']}}</p>
+                        <p class="h5 mb-4">{{weather['city']}}</p>
+                        <p class="display-2"><strong>{{weather['temp']}} C</strong> </p>
+                        <p class="h5 mb-4">Sunrise: {{weather['sunrise']}} </p>
+                        <p class="h5 mb-4">Sunset: {{weather['sunset']}}</p>
+                    </div>
+                </div>
+              <div class="row">
+                <div class="card bg-warning">
+                    <div class="card-body">
+                        <button type="button" class="btn btn-primary"><a role="button" href="/translate" class="btn btn-dark"> Translator</a></button>
+                        <button type="button" class="btn btn-primary"><a role="button" href="/destinations/currency" class="btn btn-dark"> Currency Converter </a></button>
+                    </div>
+                </div>
+              </div>
       </div>
+  </div>
 
-    <div>
+      <div>
         <h3 class="display-1 text-capitalize fw-bold p-4" style="font-size: min(calc(1.5rem + 2.5vw), 3rem);"><span class="text-primary">Discover events</span></h3>
-    </div>
+      </div>
 
     <div class="row">
         <div class="col-3 p-4">
             <div class="card bg-warning">
                 <div class="card-body">
-                    <h5>{{events[1]['name']}}</h5>
+                    <h5 class="text-primary">{{events[1]['name']}}</h5>
                     <p>{{events[1]['description']}}</p>
                     <p>Date and Time: {{events[1]['start_time']}} </p>
                     <a href="{{events[1]['event_url']}}">
-                    <img src="{{events[1]['image']}}" alt="Event" class="w-100" style="height: 200px; object-fit: cover;"></a>
+                    <img src="{{events[1]['image']}}" alt="Event" class="w-100" style="height: 150px; object-fit: cover;"></a>
                 </div>
             </div>
         </div>
         <div class="col-3 p-4">
             <div class="card bg-warning">
                 <div class="card-body">
-                    <h5>{{events[2]['name']}}</h5>
+                    <h5 class="text-primary">{{events[2]['name']}}</h5>
                     <p>{{events[2]['description']}}</p>
                     <p>Date and Time: {{events[2]['start_time']}} </p>
                     <a href="{{events[2]['event_url']}}">
@@ -82,7 +70,7 @@
         <div class="col-3 p-4">
             <div class="card bg-warning">
                 <div class="card-body">
-                    <h5>{{events[3]['name']}}</h5>
+                    <h5 class="text-primary">{{events[3]['name']}}</h5>
                     <p>{{events[3]['description']}}</p>
                     <p>Date and Time: {{events[3]['start_time']}} </p>
                     <a href="{{events[3]['event_url']}}">
@@ -93,7 +81,7 @@
         <div class="col-3 p-4">
             <div class="card bg-warning">
                 <div class="card-body">
-                    <h5>{{events[4]['name']}}</h5>
+                    <h5 class="text-primary">{{events[4]['name']}}</h5>
                     <p>{{events[4]['description']}}</p>
                     <p>Date and Time: {{events[4]['start_time']}} </p>
                     <a href="{{events[4]['event_url']}}">
@@ -111,7 +99,7 @@
             <div class="col-3 p-4">
                 <div class="card bg-warning">
                     <div class="card-body">
-                        <img src="{{attractions[0]['image']}}" class="w-100" style="height: 200px; object-fit: cover;">
+                        <img src="{{attractions[0]['image']}}" class="w-100 p-2" style="height: 200px; object-fit: cover;">
                         <h5>{{attractions[0]['name']}}</h5>
                         <p>{{attractions[0]['address']}}</p>
                     </div>
@@ -120,7 +108,7 @@
             <div class="col-3 p-4">
                 <div class="card bg-warning">
                     <div class="card-body">
-                        <img src="{{attractions[1]['image']}}" class="w-100" style="height: 200px; object-fit: cover;">
+                        <img src="{{attractions[1]['image']}}" class="w-100 p-2" style="height: 200px; object-fit: cover;">
                         <h5>{{attractions[1]['name']}}</h5>
                         <p>{{attractions[1]['address']}}</p>
                     </div>
@@ -129,7 +117,7 @@
             <div class="col-3 p-4">
                 <div class="card bg-warning">
                     <div class="card-body">
-                        <img src="{{attractions[2]['image']}}" class="w-100" style="height: 200px; object-fit: cover;">
+                        <img src="{{attractions[2]['image']}}" class="w-100 p-2" style="height: 200px; object-fit: cover;">
                         <h5>{{attractions[2]['name']}}</h5>
                         <p>{{attractions[2]['address']}}</p>
                     </div>
@@ -138,7 +126,7 @@
             <div class="col-3 p-4">
                 <div class="card bg-warning">
                     <div class="card-body">
-                        <img src="{{attractions[3]['image']}}" class="w-100" style="height: 200px; object-fit: cover;">
+                        <img src="{{attractions[3]['image']}}" class="w-100 p-2" style="height: 200px; object-fit: cover;">
                         <h5>{{attractions[3]['name']}}</h5>
                         <p>{{attractions[3]['address']}}</p>
                     </div>
