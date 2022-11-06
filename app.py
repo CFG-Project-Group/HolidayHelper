@@ -1,11 +1,12 @@
 from flask import Flask, flash, request, render_template, redirect
 from flask_login import LoginManager, UserMixin, login_user, logout_user, current_user, login_required
-from config import SECRET_KEY, google_maps_key
+from Config import SECRET_KEY, google_maps_key, weather_key
 from database.users import add_user, email_available, get_user_with_credentials, get_user_by_id
 from weather_api import GetWeatherInfo
 import google_maps
 import folium
 from events_try import Events
+from Google_Translate import translation
 from database.db_connection import get_db_connection
 
 
@@ -170,8 +171,22 @@ def view_city(city):
 @login_required
 def view_city_error(city):
     return render_template("city_error.html", user=current_user, city={'name': city})
+@app.get('/translate')
+def view_translate():
+    return render_template("translation.html", result={'detectedSourceLanguage': "en"}, title="translate", user=current_user)
+
+@app.post('/translate')
+def submit_translate():
+    toLan = request.form.get('to')
+    text = request.form.get('text')
+    output = translation(toLan, text)
+    print(output)
+    return render_template("translation.html", result=output, user_text=text, toLan=toLan)
+
+
+
 
 
 if __name__ == '__main__':
-    app.run(port=5005)
+    app.run()
 

@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Translate</title>
+    <style>
+      h3 {
+        font-size: 30px;
+      }
+      .container {
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+      }
+      .form-container {
+        display: flex;
+        background-color: gray;
+        border-radius: 10px;
+        flex-direction: column;
+        width: 380px;
+        padding: 10px;
+      }
+      .boxes-container {
+        display: flex;
+        justify-content: space-between;
+      }
+      .result-box {
+        display: flex;
+        background-color: #4e4e50;
+      }
+      textarea {
+        border-radius: 10px;
+        background-color: #37383c;
+        height: 150px;
+        width: 150px;
+        resize: none;
+        color: white;
+        padding: 10px;
+      }
+      .translate-button-container {
+        align-self: center;
+      }
+      select {
+        color: white;
+        background-color: #4e4e50;
+        padding: 11px;
+        margin-bottom: 10px;
+        width: 170px;
+        border-radius: 10px;
+      }
+      .from-select {
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        padding-bottom: 11.5px;
+        padding-top: 11.5px;
+      }
+      .to-select {
+      }
+      .detected-lang-container {
+        color: white;
+        background-color: #4e4e50;
+        border-radius: 10px;
+        padding: 10px;
+        margin-bottom: 10px;
+      }
+      button {
+        background-color: #37383c;
+        color: white;
+        padding: 20px;
+        cursor: pointer;
+        margin: 10px;
+        border-radius: 10px;
+        font-size: 16px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div>
+        <h3>
+          <span>Translate</span>
+        </h3>
+      </div>
+      <form method="post" action="/translate">
+        <div class="form-container">
+          <div class="boxes-container">
+            <div>
+              <select disabled name="from" class="from-select">
+                <option value="en"{% if result.detectedSourceLanguage =="en" %} selected="selected"{% endif %}>English</option>
+                <option value="cs"{% if result.detectedSourceLanguage=="cs" %} selected="selected"{% endif %}>Czech</option>
+                <option value="es"{% if result.detectedSourceLanguage=="es" %} selected="selected"{% endif %}>Spanish</option>
+                <option value="hu"{% if result.detectedSourceLanguage=="hu" %} selected="selected"{% endif %}>Hungarian</option>
+              </select>
+              <div>
+                <textarea id="original" name="text">
+                  {{user_text}}
+                </textarea>
+              </div>
+            </div>
+            <div>
+              <select class="to-select" name="to">
+                <option value="en"{% if toLan =="en" %} selected="selected"{% endif %}>English</option> -->
+                <option value="cs"{% if toLan=="cs" %} selected="selected"{% endif %}>Czech</option>
+                <option value="es"{% if toLan=="es" %} selected="selected"{% endif %}>Spanish</option>
+                <option value="hu"{% if toLan=="hu" %} selected="selected"{% endif %}>Hungarian</option>
+              </select>
+              <textarea disabled class="result-box">
+                {{result['translatedText']}}
+              </textarea>
+            </div>
+          </div>
+          <div class="translate-button-container">
+            <button type="submit">Translate</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </body>
+</html>
