@@ -18,6 +18,8 @@ Use the terminal to install Python packages (or go to Python Packages and search
 - mysql-connector-python
 - requests
 - google-cloud-translate
+- googlemaps
+- folium
 
 Please create a config.py file using out config_template.py and fill in all keys necessary:
 
@@ -33,7 +35,7 @@ Please create a config.py file using out config_template.py and fill in all keys
 - Frankfurter API documentation: https://www.frankfurter.app/docs/
 
 <h2> Navigation in the app: </h2>
-Once your app runs it will ask you to register or log in if you already have an account, once logged in it will grant you access to Holiday Helper and redirect you to our home page. You are now free to explore all the available information about your chosen cities!
+Once your app runs, it will show a main page, you can go to see available cities, subscribe or send us a message but to see more details, you will need to register and log in or log in if you already have an account, once logged in it will grant you access to Holiday Helper and redirect you to our home page. You are now free to explore all the available information about your chosen cities!
 
 <h2> Collaborators: </h2>
 Maneh Seiranian, Magdalena Sosinska, Mary Ruth Bongon, Samin Nazarpouri
