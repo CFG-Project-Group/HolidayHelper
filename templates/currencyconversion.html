@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Currency Converter</title>
+    <style>
+      h3 {
+        font-size: 30px;
+      }
+      .container {
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+      }
+      .form-container {
+        display: flex;
+        background-color: gray;
+        border-radius: 10px;
+        flex-direction: column;
+        width: 380px;
+        padding: 10px;
+      }
+      .boxes-container {
+        display: flex;
+        justify-content: space-between;
+      }
+      .result-box {
+        display: flex;
+        background-color: #4e4e50;
+      }
+      textarea {
+        border-radius: 10px;
+        background-color: #37383c;
+        height: 150px;
+        width: 150px;
+        resize: none;
+        color: white;
+        padding: 10px;
+      }
+      .translate-button-container {
+        align-self: center;
+      }
+      select {
+        color: white;
+        background-color: #4e4e50;
+        padding: 11px;
+        margin-bottom: 10px;
+        width: 170px;
+        border-radius: 10px;
+      }
+      .from-select {
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        padding-bottom: 11.5px;
+        padding-top: 11.5px;
+      }
+      .to-select {
+      }
+      .detected-lang-container {
+        color: white;
+        background-color: #4e4e50;
+        border-radius: 10px;
+        padding: 10px;
+        margin-bottom: 10px;
+      }
+      button {
+        background-color: #37383c;
+        color: white;
+        padding: 20px;
+        cursor: pointer;
+        margin: 10px;
+        border-radius: 10px;
+        font-size: 16px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div>
+        <h3>
+          <span>Currency Converter</span>
+        </h3>
+      </div>
+      <form action="{{ url_for('currency_convert') }}" method="POST">
+        <div class="form-container">
+          <div class="boxes-container">
+            <div>
+              <select name="from" class="from_currency">
+                <option value="CZK"{% if from_currency=="CZK" %} selected="selected"{% endif %}>Czech Koruna</option>
+                <option value="GBP"{% if from_currency =="GBP" %} selected="selected"{% endif %}>British Pounds</option>
+                <option value="EUR"{% if from_currency=="EUR" %} selected="selected"{% endif %}>Euro</option>
+                <option value="HUF"{% if from_currency=="HUF" %} selected="selected"{% endif %}>Hungarian Forints</option>
+              </select>
+              <div>
+                <textarea id="original" name="amount" type="number">
+                  {{amount}}
+                 </textarea>
+              </div>
+            </div>
+            <div>
+              <select class="to_currency" name="to">
+                <option value="GBP"{% if to_currency =="GBP" %} selected="selected"{% endif %}>British Pounds</option>
+                <option value="CZK"{% if to_currency=="CZK" %} selected="selected"{% endif %}>Czech Koruna</option>
+                <option value="EUR"{% if to_currency=="EUR" %} selected="selected"{% endif %}>Euro</option>
+                <option value="HUF"{% if to_currency=="HUF" %} selected="selected"{% endif %}>Hungarian Forints</option>
+              </select>
+              <textarea disabled class="result-box">
+                {{converted_output}}
+               </textarea>
+            </div>
+          </div>
+          <div class="translate-button-container">
+            <button type="submit">Convert</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </body>
+</html>

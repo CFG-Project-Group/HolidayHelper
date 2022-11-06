@@ -8,6 +8,7 @@ import folium
 from events_try import Events
 from Google_Translate import translation
 from database.db_connection import get_db_connection
+from currencyConversion import exchanging
 
 
 app = Flask(__name__)
@@ -184,6 +185,18 @@ def submit_translate():
     return render_template("translation.html", result=output, user_text=text, toLan=toLan)
 
 
+@app.route('/destinations/currency', methods=['GET', 'POST'])
+def currency_convert():
+    converted_currency = ""
+    if request.method == 'POST':
+        amount = int(request.form["amount"])
+        from_currency = request.form["from"]
+        to_currency = request.form["to"]
+        converted_currency = exchanging(amount, from_currency, to_currency)
+    return render_template("currencyconversion.html", title="Translator", user=current_user, converted_output=converted_currency)
+def currency_conversion(from_currency, to_currency, amount):
+    converted_currency = exchanging(amount, from_currency, to_currency)
+    return converted_currency
 
 
 
