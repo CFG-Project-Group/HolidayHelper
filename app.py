@@ -68,7 +68,7 @@ def submit_message():
     if first_name and last_name and email and message:
         with get_db_connection() as connection:
             with connection.cursor(dictionary=True) as cursor:
-                cursor.execute("""INSERT INTO messages
+                cursor.execute("""INSERT INTO contact_messages
                                          (email, first_name, last_name, message)
                                   VALUES (%s, %s, %s, %s)""", [email, first_name, last_name, message]) # the %s-s allow to avoid sql attacks, normally we would write VALUES ({email}..., but write it this way instead to avoid attacks
                 connection.commit()
