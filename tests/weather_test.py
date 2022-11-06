@@ -3,6 +3,8 @@ from unittest import TestCase, main, mock
 from weather_api import GetWeatherInfo
 import json
 from weather_helpers.weather_helpers import WeatherPicture
+from config import weather_key
+import requests
 
 
 class MyTestGetCoordinates(TestCase):
@@ -33,6 +35,14 @@ class MyTestGetCoordinates(TestCase):
 
 
 class TestGetWeather(TestCase):
+    def test_request_response(self):
+        # Send a request to the API server and store the response.
+        url = f'https://api.openweathermap.org/data/2.5/weather?lat={51.5085}&lon={-0.1257}&appid={weather_key}&units=metric'
+        response = requests.get(url)
+        # Confirm that the request-response cycle completed successfully.
+        self.assertTrue(response.ok)
+
+
     def test_api_keys(self):
         get_weather_info = GetWeatherInfo()
         """Checking if keys hasn't changed - not values as values are not constant"""
