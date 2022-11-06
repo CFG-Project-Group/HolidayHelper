@@ -1,6 +1,6 @@
 from flask import Flask, flash, request, render_template, redirect
 from flask_login import LoginManager, UserMixin, login_user, logout_user, current_user, login_required
-from Config import SECRET_KEY, google_maps_key, weather_key
+from config import SECRET_KEY, google_maps_key, weather_key
 from database.users import add_user, email_available, get_user_with_credentials, get_user_by_id
 from weather_api import GetWeatherInfo
 import google_maps
