@@ -163,7 +163,7 @@ CREATE TABLE IF NOT EXISTS subscriptions(
     );
 
 
-CREATE TABLE IF NOT EXISTS messages(
+CREATE TABLE IF NOT EXISTS contact_messages(
 	id INT AUTO_INCREMENT PRIMARY KEY,
     email VARCHAR(250) NOT NUll,
     first_name VARCHAR(50) NOT NULL,
