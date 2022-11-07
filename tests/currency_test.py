@@ -11,14 +11,14 @@ response_pound = requests.get('https://api.frankfurter.app/latest?amount=100&fro
 
 class TestConverterResponse(TestCase):
 
-    def test_hungarian_status_code(self):
+    def test_exchanging_status_code(self):
         self.assertEqual(response_forint.status_code, 200)
 
-    def test_koruna_to_Euro_request_response(self):
+    def test_exchanging_request_response(self):
         response = response_koruna
         self.assertTrue(response)
 
-    def test_hungarian_converter_content_type(self):
+    def test_exchanging_content_type(self):
         self.assertEqual(response_euro.headers['Content-Type'], 'application/json; charset=utf-8')
 
 
@@ -30,15 +30,15 @@ class TestExchangeRate(TestCase):
         result = response_koruna.json()
         self.assertEqual(list(result.keys()), ['amount', 'base', 'date', 'rates'])
 
-    def mock_currency_converter(self, currency):
-        with open(f"mock_{currency}_exchange.json") as file:
+    def mock_exchanging(self, currency):
+        with open(f"mock_GBP_exchange.json") as file:
             return json.load(file)
 
     @mock.patch("currencyConversion.requests.get")
-    def test_exchange_to_pound_when_response_is_ok(self, mock_get):
-        result = {'amount': 100.0, 'base': 'CZK', 'date': '2022-11-03', 'rates': {'GBP': 3.5547}}
+    def test_exchanging_when_response_is_ok(self, mock_get):
+        result = {'amount': 100.0, 'base': 'CZK', 'date': '2022-11-04', 'rates': {'GBP': 3.582}}
         mock_response = mock.Mock(status_code=200)
-        mock_response.json.return_value = self.mock_currency_converter('GBP')
+        mock_response.json.return_value = self.mock_exchanging('GBP')
         mock_get.return_value = mock_response
         response = response_pound.json()
         self.assertEqual(response, result)
