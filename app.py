@@ -1,6 +1,6 @@
 from flask import Flask, flash, request, render_template, redirect
 from flask_login import LoginManager, UserMixin, login_user, logout_user, current_user, login_required
-from config import SECRET_KEY, google_maps_key, weather_key
+from config import SECRET_KEY
 from database.users import add_user, email_available, get_user_with_credentials, get_user_by_id
 from weather_api import GetWeatherInfo
 import google_maps
@@ -70,7 +70,9 @@ def submit_message():
             with connection.cursor(dictionary=True) as cursor:
                 cursor.execute("""INSERT INTO contact_messages
                                          (email, first_name, last_name, message)
-                                  VALUES (%s, %s, %s, %s)""", [email, first_name, last_name, message]) # the %s-s allow to avoid sql attacks, normally we would write VALUES ({email}..., but write it this way instead to avoid attacks
+                                  VALUES (%s, %s, %s, %s)""", [email, first_name, last_name, message])
+                # the %s-s allow avoiding sql attacks, normally we would write VALUES ({email}...,
+                # but write it this way instead to avoid attacks
                 connection.commit()
     return redirect('/contact')
 
@@ -83,7 +85,9 @@ def submit_subscribe():
             with connection.cursor(dictionary=True) as cursor:
                 cursor.execute("""INSERT INTO subscriptions
                                          (email)
-                                  VALUES (%s)""", [email]) # the %s-s allow to avoid sql attacks, normally we would write VALUES ({email}..., but write it this way instead to avoid attacks
+                                  VALUES (%s)""", [email])
+                # the %s-s allow avoiding sql attacks, normally we would write VALUES ({email}...,
+                # but write it this way instead to avoid attacks
                 connection.commit()
     return redirect('/contact')
 
@@ -134,24 +138,28 @@ def submit_signout():
 def view_profile():
     return render_template("profile.html", user=current_user)
 
+
 def weather_output(city):
     get_info = GetWeatherInfo()
     output_weather = get_info.get_weather(city)
     return output_weather
+
 
 def events_output(city):
     event = Events()
     output_for_events = event.display_events(f'{city}')
     return output_for_events
 
+
 def attractions(city):
     output_for_attractions = google_maps.display_attractions(city)
     return output_for_attractions
 
+
 def maps(city):
     map_center = google_maps.geocode_city(city)
     list_of_places = google_maps.list_of_places(city)
-    folium_map = folium.Map(location=map_center, tiles = 'openstreetmap', zoom_start=12)
+    folium_map = folium.Map(location=map_center, tiles='openstreetmap', zoom_start=12)
     for item in list_of_places:
         folium.Marker(location=item[1], popup=item[0]).add_to(folium_map)
     return folium_map._repr_html_()
@@ -164,7 +172,8 @@ def view_city(city):
         return redirect("/city/<city>/error")
     else:
         return render_template("city.html", user=current_user, city={'name': city},
-                               weather=weather_output(city), events=events_output(city), attractions=attractions(city), maps = maps(city)
+                               weather=weather_output(city), events=events_output(city),
+                               attractions=attractions(city), maps=maps(city)
                                )
 
 
@@ -176,7 +185,8 @@ def view_city_error(city):
 
 @app.get('/translate')
 def view_translate():
-    return render_template("translation.html", result={'detectedSourceLanguage': "en"}, title="translate", user=current_user)
+    return render_template("translation.html", result={'detectedSourceLanguage': "en"},
+                           title="translate", user=current_user)
 
 
 @app.post('/translate')
@@ -196,7 +206,8 @@ def currency_convert():
         from_currency = request.form["from"]
         to_currency = request.form["to"]
         converted_currency = exchanging(amount, from_currency, to_currency)
-    return render_template("currencyconversion.html", title="Translator", user=current_user, converted_output=converted_currency)
+    return render_template("currencyconversion.html", title="Translator", user=current_user,
+                           converted_output=converted_currency)
 
 
 def currency_conversion(from_currency, to_currency, amount):
@@ -204,7 +215,5 @@ def currency_conversion(from_currency, to_currency, amount):
     return converted_currency
 
 
-
 if __name__ == '__main__':
     app.run()
-
