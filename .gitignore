@@ -133,3 +133,9 @@ GoogleKey.json
 
 # config file
 config.py
+
+# .idea files
+.idea/
+
+# node modules
+node_modules/

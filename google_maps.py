@@ -41,6 +41,10 @@ def display_attractions(city):
     return attraction_attributes
 
 
+if __name__ == '__main__':
+    print(geocode_city("Budapest"))
+    print(list_of_places("Budapest"))
+    print(display_attractions("Budapest"))
 
 
 
