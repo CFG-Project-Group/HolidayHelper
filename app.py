@@ -183,31 +183,34 @@ def view_city_error(city):
     return render_template("city_error.html", user=current_user, city={'name': city})
 
 
-@app.get('/translate')
+@app.get('/destinations/translate')
+@login_required
 def view_translate():
     return render_template("translation.html", result={'detectedSourceLanguage': "en"},
                            title="translate", user=current_user)
 
 
-@app.post('/translate')
+@app.post('/destinations/translate')
+@login_required
 def submit_translate():
     toLan = request.form.get('to')
     text = request.form.get('text')
     output = translation(toLan, text)
-    print(output)
     return render_template("translation.html", result=output, user_text=text, toLan=toLan)
 
 
 @app.route('/destinations/currency', methods=['GET', 'POST'])
+@login_required
 def currency_convert():
     converted_currency = ""
+    amount = ""
     if request.method == 'POST':
         amount = int(request.form["amount"])
         from_currency = request.form["from"]
         to_currency = request.form["to"]
         converted_currency = exchanging(amount, from_currency, to_currency)
     return render_template("currencyconversion.html", title="Translator", user=current_user,
-                           converted_output=converted_currency)
+                           amount=amount, converted_output=converted_currency)
 
 
 def currency_conversion(from_currency, to_currency, amount):
