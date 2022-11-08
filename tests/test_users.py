@@ -54,8 +54,8 @@ class TestUsers(TestCase):
          database through the query_result method below, which is why the first argument of assertEqual below is
          query_result, as we are trying to retrieve what has been added by add_user.
 
-         Please note the negative test of whether an error is raised if an attempt of an existing email addition is
-         done is covered by the test_submit_signup test in the test_app module.
+         Please note the negative test of whether an error is raised if an attempt of an existing email addition would
+         be covered in future testing of app.py as this method is used there to come up with negative scenarios
         """
         self.delete_Test_User()
         def query_result():
@@ -90,7 +90,8 @@ class TestUsers(TestCase):
         password in the database
 
         Please note the negative test of whether an error is raised if an incorrect email and password and/or password
-        are input is covered by the submit_login test in the test_app module.
+        are input is would be covered in future testing of app.py as this method is used there to come up with negative
+        scenarios
         """
 
         self.add_sample_user()
@@ -120,7 +121,8 @@ class TestUsers(TestCase):
         by checking if the corresponding id is in the database
 
         Please note the negative test of whether an error is raised if when loading the site a user id is not in the
-        database is covered in the user_loader test in the test_app module.
+        database would be covered in future testing of app.py as this method is used there to come up with negative
+        scenarios
 
         """
         self.add_sample_user()
@@ -140,4 +142,3 @@ class TestUsers(TestCase):
 
 if __name__ == '__main__':
     main()
-
