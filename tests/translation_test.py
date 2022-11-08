@@ -5,7 +5,7 @@ import os
 from config import translate_key
 
 
-os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = r'GoogleKey.json'
+os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = translate_key
 translate_client = translate_v2.Client()
 
 object_1 = translation("en", "ahoj")

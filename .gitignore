@@ -139,3 +139,5 @@ config.py
 
 # node modules
 node_modules/
+
+GoogleKey.json
