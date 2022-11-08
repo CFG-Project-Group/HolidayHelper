@@ -1,6 +1,7 @@
 import datetime
 from unittest import TestCase, main, mock
-from weather_api import GetWeatherInfo
+from api import weather_api
+from api.weather_api import GetWeatherInfo
 import json
 from weather_helpers.weather_helpers import WeatherPicture
 from config import weather_key
@@ -55,7 +56,7 @@ class TestGetWeather(TestCase):
         with open(f"mock_weather_{city}.json") as file:
             return json.load(file)
 
-    @mock.patch("weather_api.requests.get")
+    @mock.patch("api.weather_api.requests.get")
     def test_get_weather_barcelona(self, mock_get):
         get_weather_info = GetWeatherInfo()
         expected_response = {'city': 'Barcelona', 'weather': "Few clouds", 'temp': 22.1,
@@ -68,7 +69,7 @@ class TestGetWeather(TestCase):
         response = get_weather_info.get_weather('barcelona')
         self.assertEqual(response, expected_response)
 
-    @mock.patch("weather_api.requests.get")
+    @mock.patch("api.weather_api.requests.get")
     def test_get_weather_london(self, mock_get):
         get_weather_info = GetWeatherInfo()
         expected_response = {'city': 'London',

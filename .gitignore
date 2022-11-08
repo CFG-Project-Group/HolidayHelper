@@ -129,7 +129,7 @@ dmypy.json
 .pyre/
 
 #Google API keys
-GoogleKey.json
+api/GoogleKey.json
 
 # config file
 config.py

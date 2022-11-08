@@ -2,13 +2,13 @@ from flask import Flask, flash, request, render_template, redirect
 from flask_login import LoginManager, UserMixin, login_user, logout_user, current_user, login_required
 from config import SECRET_KEY
 from database.users import add_user, email_available, get_user_with_credentials, get_user_by_id
-from weather_api import GetWeatherInfo
-import google_maps
+from api.weather_api import GetWeatherInfo
+from api import google_maps
 import folium
-from events_try import Events
-from Google_Translate import translation
+from api.events import Events
+from api.google_translate import translation
 from database.db_connection import get_db_connection
-from currencyConversion import exchanging
+from api.currency_conversion import exchanging
 
 
 app = Flask(__name__)

@@ -1,7 +1,7 @@
 from unittest import TestCase, main, mock
 import json
 import requests
-from  currencyConversion import exchanging
+from api.currency_conversion import exchanging
 
 
 response_forint = requests.get('https://api.frankfurter.app/latest?amount=100&from=GBP&to=HUF')
@@ -35,7 +35,7 @@ class TestExchangeRate(TestCase):
         with open(f"mock_GBP_exchange.json") as file:
             return json.load(file)
 
-    @mock.patch("currencyConversion.requests.get")
+    @mock.patch("api.currency_conversion.requests.get")
     def test_exchanging_when_response_is_ok(self, mock_get):
         result = {'amount': 100.0, 'base': 'CZK', 'date': '2022-11-04', 'rates': {'GBP': 3.582}}
         mock_response = mock.Mock(status_code=200)
