@@ -1,7 +1,8 @@
 from unittest import TestCase, main
-from Google_Translate import translation
+from api.google_translate import translation
 from google.cloud import translate_v2
 import os
+from config import translate_key
 
 
 os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = r'GoogleKey.json'

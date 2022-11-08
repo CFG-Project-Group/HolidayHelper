@@ -1,8 +1,9 @@
 from unittest import TestCase, main, mock
-from events_try import Events
+from api.events import Events
 import json
 import requests
 from config import events_key
+
 
 
 class MyTestEvents(TestCase):
@@ -29,7 +30,7 @@ class MyTestEvents(TestCase):
             new_data = data["events_results"]
             return new_data
 
-    @mock.patch('events_try.Events.get_events')
+    @mock.patch('api.events.Events.get_events')
     def test_display_events_budapest(self, mock_get_events):
         event = Events()
         expected_response = [{'city': 'Budapest'},
