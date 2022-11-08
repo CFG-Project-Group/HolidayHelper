@@ -7,8 +7,9 @@ from api import google_maps
 import folium
 from api.events import Events
 from api.google_translate import translation
-from database.db_connection import get_db_connection
 from api.currency_conversion import exchanging
+from database.messages import add_message
+from database.subscriptions import add_subscription
 
 
 app = Flask(__name__)
@@ -66,14 +67,7 @@ def submit_message():
     email = request.form.get('email')
     message = request.form.get('message')
     if first_name and last_name and email and message:
-        with get_db_connection() as connection:
-            with connection.cursor(dictionary=True) as cursor:
-                cursor.execute("""INSERT INTO contact_messages
-                                         (email, first_name, last_name, message)
-                                  VALUES (%s, %s, %s, %s)""", [email, first_name, last_name, message])
-                # the %s-s allow avoiding sql attacks, normally we would write VALUES ({email}...,
-                # but write it this way instead to avoid attacks
-                connection.commit()
+        add_message(email, first_name, last_name, message)
     return redirect('/contact')
 
 
@@ -81,14 +75,7 @@ def submit_message():
 def submit_subscribe():
     email = request.form.get('email')
     if email:
-        with get_db_connection() as connection:
-            with connection.cursor(dictionary=True) as cursor:
-                cursor.execute("""INSERT INTO subscriptions
-                                         (email)
-                                  VALUES (%s)""", [email])
-                # the %s-s allow avoiding sql attacks, normally we would write VALUES ({email}...,
-                # but write it this way instead to avoid attacks
-                connection.commit()
+        add_subscription(email)
     return redirect('/contact')
 
 

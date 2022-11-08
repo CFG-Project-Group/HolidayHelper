@@ -1,8 +1,9 @@
 import os
 from google.cloud import translate_v2
 import requests
+from config import translate_key
 
-os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = r'GoogleKey.json'
+os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = translate_key
 
 # text = input("input: ")
 translate_client = translate_v2.Client()
