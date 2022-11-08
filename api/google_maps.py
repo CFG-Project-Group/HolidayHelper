@@ -43,8 +43,20 @@ def display_attractions(city):
 
 if __name__ == '__main__':
     print(geocode_city("Budapest"))
+    print(geocode_city("London"))
+    print(geocode_city("Prague"))
+    print(geocode_city("Barcelona"))
+
     print(list_of_places("Budapest"))
+    print(list_of_places("London"))
+    print(list_of_places("Prague"))
+    print(list_of_places("Barcelona"))
+
     print(display_attractions("Budapest"))
+    print(display_attractions("London"))
+    print(display_attractions("Prague"))
+    print(display_attractions("Barcelona"))
+
 
 
 
