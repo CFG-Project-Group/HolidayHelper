@@ -2,7 +2,7 @@ from unittest import TestCase, main, mock
 import json
 import requests
 from config import google_maps_key
-from google_maps import geocode_city, list_of_places, display_attractions
+from api.google_maps import geocode_city, list_of_places, display_attractions
 import googlemaps
 
 
